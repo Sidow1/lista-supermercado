@@ -12,7 +12,7 @@ interface Form extends HTMLFormElement {
 function App() {
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, toggleLoading] = useState<boolean>(true);
-  const [listItem, setListItem] = useState("");
+  const [itemInput, setItemInput] = useState("");
 
   function handleToggle(id: Item["id"]) {
     setItems((items) =>
@@ -24,17 +24,17 @@ function App() {
 
   function handleAdd(event: React.ChangeEvent<Form>) {
     event.preventDefault();
-    if (listItem === "") return;
+    if (itemInput === "") return;
 
     setItems((items) =>
       items.concat({
         id: items.length + 1,
         completed: false,
-        text: listItem,
+        text: itemInput,
       })
     );
 
-    setListItem("");
+    setItemInput("");
   }
 
   function handleRemove(id: Item["id"]) {
@@ -57,8 +57,8 @@ function App() {
         <input
           name="text"
           type="text"
-          value={listItem}
-          onChange={(e) => setListItem(e.target.value)}
+          value={itemInput}
+          onChange={(e) => setItemInput(e.target.value)}
         />
         <button>Add</button>
       </form>
